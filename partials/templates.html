@@ -1,0 +1,21 @@
+<p>
+    <a class="pointer" data-ng-click="openEditor();">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+    </a>
+</p>
+
+<hr />
+
+<div class="panel panel-default margin-top-15" data-ng-repeat="template in options.templates track by $index">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span data-ng-bind="template.name"></span>
+            <span><a class="pull-right btn btn-xs btn-primary" data-ng-click="useTemplate( template );">Use</a></span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div data-ng-bind-html="getTrustedHTML( template.code );"></div>
+    </div>
+
+</div>

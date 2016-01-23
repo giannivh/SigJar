@@ -9,7 +9,9 @@ angular.module('sigjar')
 
       $scope.options =
       {
+          view: 'EDITOR',
           feedback: { code: null, message: null },
+          templates: [],
           signatures: [],
           selectedSignature: null
       };
@@ -107,9 +109,35 @@ angular.module('sigjar')
           });
       };
 
+      $scope.openTemplates = function() {
+
+          $scope.options.view = 'TEMPLATES';
+      };
+
+      $scope.openEditor = function() {
+
+          $scope.options.view = 'EDITOR';
+      };
+
+      $scope.useTemplate = function( template ) {
+
+          if (!template) {
+
+              return;
+          }
+
+          $scope.options.selectedSignature.code = template.code;
+          $scope.openEditor();
+      };
+
+      $scope.getTrustedHTML = function( code ) {
+
+          return $sce.trustAsHtml( code );
+      };
+
       $scope.getSignaturePreview = function() {
 
-          return $sce.trustAsHtml( $scope.options.selectedSignature.code );
+          return $scope.getTrustedHTML( $scope.options.selectedSignature.code );
       };
 
       $scope.resetFeedback = function() {
@@ -118,6 +146,17 @@ angular.module('sigjar')
       };
 
       $scope.loadOptions = function() {
+
+          chrome.storage.sync.get(
+              { templates: [] },
+              function( items ) {
+
+                  $scope.$apply(function () {
+
+                      $scope.options.templates = items.templates;
+                  });
+              }
+          );
 
           chrome.storage.sync.get(
               { signatures: [] },

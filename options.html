@@ -16,69 +16,8 @@
 
     <div ng-controller="OptionsController">
 
-        <!-- Signature selection -->
-        <ul class="nav nav-tabs">
-            <li role="presentation" data-ng-class="{'active': options.selectedSignature.name == signature.name}" data-ng-repeat="signature in options.signatures track by $index">
-                <a class="pointer" data-ng-click="selectSignature( signature );">{{ signature.name }}</a>
-            </li>
-            <li>
-                <a class="pointer" data-ng-click="createSignature();">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </a>
-            </li>
-        </ul>
-
-        <!-- Signature name -->
-        <form class="form-horizontal margin-top-15">
-            <div class="form-group">
-                <label for="inputName" class="col-xs-2 control-label">Name:</label>
-                <div class="col-xs-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="name" data-ng-model="options.selectedSignature.name">
-                </div>
-            </div>
-        </form>
-
-        <!-- Editor -->
-        <p>
-            <strong>Signature:</strong>
-            <small><em>To get the best results, avoid having new lines in your code.</em></small>
-        </p>
-        <textarea data-ng-model="options.selectedSignature.code" placeholder="Signature HTML code here..." class="form-control" rows="5"></textarea>
-
-        <!-- Feedback and buttons -->
-        <div class="margin-top-15 row">
-            <div class="col-xs-6">
-                <!-- Feedback message -->
-                <p>
-                    <strong data-ng-class="{'text-success': options.feedback.code == 'OK', 'text-danger': options.feedback.code != 'OK'}" data-ng-show="options.feedback.code" data-ng-bind="options.feedback.message"></strong>
-                </p>
-            </div>
-            <div class="col-xs-6 text-right">
-                <p>
-                    <!-- Remove button -->
-                    <a class="btn btn-danger" data-ng-click="removeSignature();" data-ng-disabled="options.signatures.length == 1">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
-                    </a>
-                    <!-- Save button -->
-                    <a class="btn btn-success" data-ng-click="saveOptions();">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
-                    </a>
-                </p>
-            </div>
-        </div>
-
-        <hr />
-
-        <!-- Preview -->
-        <div class="panel panel-default margin-top-15">
-            <div class="panel-heading">
-                <h3 class="panel-title">Signature preview</h3>
-            </div>
-            <div class="panel-body">
-                <div data-ng-bind-html="getSignaturePreview();" data-ng-if="options.selectedSignature.code"></div>
-                <p data-ng-if="!options.selectedSignature.code"><em>Nothing to preview...</em></p>
-            </div>
-        </div>
+        <div data-ng-include data-src="'partials/editor.html'" data-ng-show="options.view == 'EDITOR'"></div>
+        <div data-ng-include data-src="'partials/templates.html'" data-ng-show="options.view == 'TEMPLATES'"></div>
 
     </div>
 
