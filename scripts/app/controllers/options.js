@@ -25,11 +25,38 @@ angular.module('sigjar')
           $scope.options.selectedSignature = signature;
       };
 
+      $scope.getNameHits = function( name ) {
+
+          var hits = 0;
+
+          for (var i = 0; i < $scope.options.signatures.length; i++) {
+
+              if ($scope.options.signatures[i].name == name) {
+
+                  hits++;
+              }
+          }
+
+          return hits;
+      };
+
+      $scope.isNameTaken = function( name ) {
+
+          return $scope.getNameHits( name ) > 0;
+      };
+
       $scope.createSignature = function() {
+
+          var index = $scope.options.signatures.length + 1;
+
+          while ($scope.isNameTaken( 'Signature ' + index )) {
+
+              index++;
+          }
 
           $scope.options.signatures.push(
               {
-                  name: 'Signature ' + ($scope.options.signatures.length + 1),
+                  name: 'Signature ' + index,
                   code: '<p>Kind regards,<br/>John Doe</p>'
               }
           );
@@ -110,6 +137,21 @@ angular.module('sigjar')
               }
           );
       };
+
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //
+      // Watchers
+      //
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      $scope.$watch( 'options.selectedSignature.name', function( value ) {
+
+          if ($scope.getNameHits( $scope.options.selectedSignature.name ) > 1) {
+
+              $scope.options.selectedSignature.name = $scope.options.selectedSignature.name + ' (1)';
+          }
+
+      } );
 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       //
