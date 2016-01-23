@@ -73,26 +73,38 @@ angular.module('sigjar')
               return;
           }
 
-          var index = -1;
-          for (var i = 0; i < $scope.options.signatures.length; i++) {
+          alertify.set({ labels: {
+              ok     : "Yes",
+              cancel : "No"
+          } });
 
-              var sig = $scope.options.signatures[i];
+          alertify.confirm( 'Are you sure you want to remove this signature?', function (e) {
 
-              if (sig.name == $scope.options.selectedSignature.name) {
+              if (e) {
 
-                  index = i;
-                  break;
+                  // user clicked "ok"
+                  var index = -1;
+                  for (var i = 0; i < $scope.options.signatures.length; i++) {
+
+                      var sig = $scope.options.signatures[i];
+
+                      if (sig.name == $scope.options.selectedSignature.name) {
+
+                          index = i;
+                          break;
+                      }
+                  }
+
+                  if (i > -1) {
+
+                      $scope.options.signatures.splice( index, 1 );
+                  }
+
+                  $scope.options.selectedSignature = $scope.options.signatures[index == 0? 0: index-1];
+
+                  $scope.saveOptions( 'The signature has been removed.' );
               }
-          }
-
-          if (i > -1) {
-
-              $scope.options.signatures.splice( index, 1 );
-          }
-
-          $scope.options.selectedSignature = $scope.options.signatures[index == 0? 0: index-1];
-
-          $scope.saveOptions( 'The signature has been removed.' );
+          });
       };
 
       $scope.getSignaturePreview = function() {
@@ -146,9 +158,12 @@ angular.module('sigjar')
 
       $scope.$watch( 'options.selectedSignature.name', function( value ) {
 
-          if ($scope.getNameHits( $scope.options.selectedSignature.name ) > 1) {
+          if ($scope.options.selectedSignature && $scope.options.selectedSignature.name) {
 
-              $scope.options.selectedSignature.name = $scope.options.selectedSignature.name + ' (1)';
+              if ($scope.getNameHits( $scope.options.selectedSignature.name ) > 1) {
+
+                  $scope.options.selectedSignature.name = $scope.options.selectedSignature.name + ' (1)';
+              }
           }
 
       } );
