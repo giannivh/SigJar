@@ -20,20 +20,6 @@ angular.module('sigjar')
       //
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      $scope.getDefaultSignatures = function() {
-
-          return [
-              {
-                  name: 'Personal',
-                  code: '<p>Kind regards,<br/>John Doe</p>'
-              },
-              {
-                  name: 'Work',
-                  code: '<p>Kind regards,<br/>John Doe</p>'
-              }
-          ];
-      };
-
       $scope.selectSignature = function( signature ) {
 
           $scope.options.selectedSignature = signature;
@@ -77,7 +63,7 @@ angular.module('sigjar')
               $scope.options.signatures.splice( index, 1 );
           }
 
-          $scope.options.selectedSignature = $scope.options.signatures[index-1];
+          $scope.options.selectedSignature = $scope.options.signatures[index == 0? 0: index-1];
 
           $scope.saveOptions( 'The signature has been removed.' );
       };
@@ -95,7 +81,7 @@ angular.module('sigjar')
       $scope.loadOptions = function() {
 
           chrome.storage.sync.get(
-              { signatures: $scope.getDefaultSignatures() },
+              { signatures: [] },
               function( items ) {
 
                   $scope.$apply(function () {
@@ -131,8 +117,6 @@ angular.module('sigjar')
       //
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      $scope.options.signatures = $scope.getDefaultSignatures();
-      $scope.selectSignature( $scope.options.signatures[0] );
       $scope.loadOptions();
 
   }])

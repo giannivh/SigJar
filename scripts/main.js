@@ -1,3 +1,7 @@
+//
+// Functions
+//
+
 openOptions = function(info, tab) {
 
   chrome.runtime.openOptionsPage();
@@ -33,7 +37,7 @@ createContextMenu = function() {
 
     //For each signature: add
     chrome.storage.sync.get(
-        { signatures: [ {name: 'Personal', code: '<p>Kind regards,<br/>John Doe</p>'}, {name: 'Work', code: '<p>Kind regards,<br/>John Doe</p>'} ] },
+        { signatures: [] },
         function( items ) {
 
             var signatures = items.signatures;
@@ -52,10 +56,47 @@ createContextMenu = function() {
     );
 };
 
+initializeOptions = function() {
+
+    //
+    // Initialize default signatures, if needed
+    //
+
+    chrome.storage.sync.get(
+        { signatures: [] },
+        function( items ) {
+
+            if (items.signatures.length == 0) {
+
+                var defaultSignatures =
+                    [
+                        {
+                            name: 'Personal',
+                            code: '<p>Kind regards,<br/>John Doe</p>'
+                        },
+                        {
+                            name: 'Work',
+                            code: '<p>Kind regards,<br/>John Doe</p>'
+                        }
+                    ];
+
+                chrome.storage.sync.set(
+                    { signatures: defaultSignatures },
+                    function() {
+
+                        console.log( 'Default signatures created!' );
+                    }
+                );
+            }
+        }
+    );
+};
+
 //
-// Create context menu
+// Initiate app
 //
 
+initializeOptions();
 createContextMenu();
 
 chrome.storage.onChanged.addListener(
