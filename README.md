@@ -12,7 +12,7 @@ That's why SigJar was created. It's a simple Google Chrome extension which can i
 
 Go to the Google Chrome extensions page, and select "Options" of the SigJar extension. Alternatively, right click anywhere in a page, hover over "SigJar" and select "Options" from the submenu.
 
-Follow the on-screen instructions to create your fancy HTML signature.
+Follow the on-screen instructions to create your fancy HTML signature. There are a few templates to get you started.
 
 ## How to insert the signature?
 
