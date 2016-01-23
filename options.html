@@ -21,11 +21,21 @@
             </li>
         </ul>
 
+        <!-- Signature name -->
+        <form class="form-horizontal margin-top-15">
+            <div class="form-group">
+                <label for="inputName" class="col-xs-2 control-label">Name:</label>
+                <div class="col-xs-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="name" data-ng-model="options.selectedSignature.name">
+                </div>
+            </div>
+        </form>
+
+        <!-- Editor -->
         <p>
             <strong>Signature:</strong>
-            <em>To get the best results, avoid having new lines in your code.</em>
+            <small><em>To get the best results, avoid having new lines in your code.</em></small>
         </p>
-
         <textarea data-ng-model="options.selectedSignature.code" placeholder="Signature HTML code here..." class="form-control" rows="5"></textarea>
 
         <!-- Save button -->
