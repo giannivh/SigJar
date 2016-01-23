@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="sigjar" ng-csp>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SigJar Options</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="screen">
+    <link rel="stylesheet" href="css/angular-csp.css" type="screen">
+    <link rel="stylesheet" href="css/sigjar.css" type="screen">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+  </head>
+
+  <body>
+
+    <div ng-controller="OptionsController">
+
+        <!-- Signature selection -->
+        <ul class="nav nav-tabs">
+            <li role="presentation" data-ng-class="{'active': options.selectedSignature.name == signature.name}" data-ng-repeat="signature in options.signatures">
+                <a class="pointer" data-ng-click="selectSignature( signature );">{{ signature.name }}</a>
+            </li>
+        </ul>
+
+        <p>
+            <strong>Signature:</strong>
+            <em>To get the best results, avoid having new lines in your code.</em>
+        </p>
+
+        <textarea data-ng-model="options.selectedSignature.code" placeholder="Signature HTML code here..." class="form-control" rows="5"></textarea>
+
+        <!-- Save button -->
+        <p class="margin-top-15 text-right">
+            <a class="btn btn-success" data-ng-click="saveOptions();">Save</a>
+        </p>
+
+        <hr />
+
+        <!-- Preview -->
+        <div class="panel panel-default margin-top-15">
+            <div class="panel-heading">
+                <h3 class="panel-title">Signature preview</h3>
+            </div>
+            <div class="panel-body">
+                <div data-ng-bind-html="getSignaturePreview();" data-ng-if="options.selectedSignature.code"></div>
+                <p data-ng-if="!options.selectedSignature.code"><em>Nothing to preview...</em></p>
+            </div>
+        </div>
+
+        <!-- Feedback message -->
+        <div class="alert" data-ng-class="{'alert-success text-success': options.feedback.code == 'OK', 'alert-danger text-danger': options.feedback.code != 'OK'}" data-ng-show="options.feedback.code">
+            <p data-ng-bind="options.feedback.message"></p>
+        </div>
+
+    </div>
+
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/underscore/underscore.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/angular/angular.min.js"></script>
+    <script src="scripts/app/modules/angular-underscore.min.js"></script>
+    <script src="scripts/app/modules/ui-bootstrap-0.9.0.min.js"></script>
+    <script src="scripts/app/app.js"></script>
+    <script src="scripts/app/services/storage.js"></script>
+    <script src="scripts/app/controllers/options.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "manifest_version": 2,
+  "name": "SigJar",
+  "description": "This extension allows you to create fancy HTML signatures which can be used when composing mails.",
+  "version": "1.0",
+  "author":"Gianni Van Hoecke",
+
+  "icons": { 
+    "16": "images/signature16.png",
+    "48": "images/signature48.png",
+    "128": "images/signature128.png" 
+  },
+
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "http://fonts.googleapis.com/",
+    "https://*.google-analytics.com/**/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*","https://*/*","file://*/*"],
+      "js": ["js/jquery/jquery.min.js", "scripts/content_script.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "background": { 
+    "page": "background.html"
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}
