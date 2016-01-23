@@ -1,6 +1,6 @@
 # SigJar
 
-A Google Chrome extension that allows you to create fancy HTML signatures which can be used when composing mails.
+![SigJar](https://giannivanhoecke.com/sig/signature48.png "SigJar logo") A Google Chrome extension that allows you to create fancy HTML signatures which can be used when composing mails.
 
 ## Why SigJar?
 
@@ -14,6 +14,11 @@ Go to the Google Chrome extensions page, and select "Options" of the SigJar exte
 
 Follow the on-screen instructions to create your fancy HTML signature. There are a few templates to get you started.
 
+![SigJar Options](https://giannivanhoecke.com/sig/sigjar_01_options.png "SigJar options")
+![SigJar Templates](https://giannivanhoecke.com/sig/sigjar_02_templates.png "SigJar templates")
+
 ## How to insert the signature?
 
 Right click inside the content editor where you want your signature to appear. Hover over "SigJar" and select one of your signatures from the submenu. 
+
+![SigJar insert signature](https://giannivanhoecke.com/sig/sigjar_03_menu.png "SigJar insert signature")
