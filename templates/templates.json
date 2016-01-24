@@ -1,0 +1,24 @@
+{
+  "messages":
+  [
+    {
+      "id": 0,
+      "name": "Disclaimer",
+      "selected": false,
+      "file": "templates/disclaimer.html"
+    }
+  ],
+  "templates":
+  [
+    {
+      "id": 0,
+      "name": "Basic",
+      "file": "templates/basic.html"
+    },
+    {
+      "id": 1,
+      "name": "Professional",
+      "file": "templates/professional.html"
+    }
+  ]
+}

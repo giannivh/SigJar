@@ -1,15 +1,16 @@
 html {
 
     overflow: auto;
+    min-width: 800px;
+    width: 800px;
+    max-width: 800px;
+    min-height: 500px;
 }
 
 body {
 
   background: #f9f9f9;
-  /*height: 550px;*/
   padding: 10px;
-  overflow: hidden;
-  width: 600px;
 }
 
 .margin-top-15 {
@@ -20,4 +21,59 @@ body {
 .pointer {
 
     cursor: pointer;
+}
+
+.border-right {
+
+    border-right: 1px solid #4cae4c;
+}
+
+.border-left {
+
+    border-left: 1px solid #4cae4c;
+}
+
+.border-bottom {
+
+    padding-bottom: 15px;
+    border-bottom: 1px solid #4cae4c;
+    width: 100%;
+}
+
+.border-top {
+
+    padding-top: 15px;
+    border-top: 1px solid #4cae4c;
+    width: 100%;
+}
+
+.full-width {
+
+    width: 100%;
+}
+
+.underline {
+
+    text-decoration: underline;
+}
+
+.picture-preview {
+
+    width: 100px;
+    max-width: 100px;
+    height: auto;
+}
+
+.signature-preview-container {
+
+    width: 100%;
+    min-height: 120px;
+    height: 120px;
+    max-height: 120px;
+}
+
+.signature-preview {
+
+    width: 50%;
+    margin: 0 auto;
 }

@@ -1,21 +1,67 @@
-<p>
-    <a class="pointer" data-ng-click="openEditor();">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
-    </a>
-</p>
+<h4 class="text-center">New signature</h4>
 
 <hr />
 
-<div class="panel panel-default margin-top-15" data-ng-repeat="template in options.templates track by $index">
-
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            <span data-ng-bind="template.name"></span>
-            <span><a class="pull-right btn btn-xs btn-primary" data-ng-click="useTemplate( template );">Use</a></span>
-        </h3>
+<!-- Signature name -->
+<form class="form-horizontal margin-top-15">
+    <div class="form-group">
+        <label for="inputName" class="col-xs-4 control-label">Enter a signature name:</label>
+        <div class="col-xs-8">
+            <input type="text" class="form-control" id="inputName" placeholder="Signature name" data-ng-model="options.newSignature.name">
+        </div>
     </div>
-    <div class="panel-body">
-        <div data-ng-bind-html="getTrustedHTML( template.code );"></div>
-    </div>
+</form>
 
+<!-- Signature templates -->
+<p class="text-center">
+    <strong>Choose a template</strong>
+</p>
+<div class="signature-preview-container text-center">
+    <div class="text-left">
+        <div class="signature-preview" data-ng-bind-html="getTrustedHTML( options.newSignature.template.code );"></div>
+    </div>
+</div>
+<nav class="text-center">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous" data-ng-click="previousTemplate();">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li data-ng-class="{'active': options.newSignature.template.id == template.id}" data-ng-repeat="template in options.templates">
+            <a href="#" data-ng-click="selectTemplate( template.id );">
+                {{ (template.id + 1) }}
+            </a>
+        </li>
+        <li>
+            <a href="#" aria-label="Next" data-ng-click="nextTemplate();">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Disclaimer -->
+<p class="text-center">
+    <strong>Add additional messages</strong>
+</p>
+<p class="text-center" data-ng-repeat="message in options.messages">
+    <label>
+        <input type="checkbox" data-ng-model="message.selected" />
+        <span data-ng-bind="message.name"></span>
+    </label>
+</p>
+
+<!-- Buttons -->
+<div class="row">
+    <div class="col-xs-6">
+        <a class="btn btn-default pointer full-width" data-ng-click="openOverview();">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+        </a>
+    </div>
+    <div class="col-xs-6">
+        <a class="btn btn-success pointer full-width" data-ng-click="createSignature();">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Create
+        </a>
+    </div>
 </div>

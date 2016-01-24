@@ -10,13 +10,16 @@
       <link rel="stylesheet" href="css/font-awesome.min.css">
       <link rel="stylesheet" href="css/alertify.core.css" />
       <link rel="stylesheet" href="css/alertify.bootstrap.css" />
+      <link rel="stylesheet" href="css/loading.css" />
   </head>
 
   <body>
 
     <div ng-controller="OptionsController">
 
-        <div data-ng-include data-src="'partials/editor.html'" data-ng-show="options.view == 'EDITOR'"></div>
+        <div data-ng-include data-src="'partials/loading.html'" data-ng-show="options.view == 'LOADING'"></div>
+        <div data-ng-include data-src="'partials/wizard.html'" data-ng-show="options.view == 'WIZARD'"></div>
+        <div data-ng-include data-src="'partials/overview.html'" data-ng-show="options.view == 'OVERVIEW'"></div>
         <div data-ng-include data-src="'partials/templates.html'" data-ng-show="options.view == 'TEMPLATES'"></div>
 
     </div>

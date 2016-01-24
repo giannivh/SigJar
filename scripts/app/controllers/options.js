@@ -1,5 +1,5 @@
 angular.module('sigjar')
-  .controller('OptionsController', ['$scope', '$timeout', '$sce', function($scope, $timeout, $sce) {
+  .controller('OptionsController', ['$scope', '$timeout', '$sce', '$http', function($scope, $timeout, $sce, $http) {
 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       //
@@ -9,11 +9,35 @@ angular.module('sigjar')
 
       $scope.options =
       {
-          view: 'EDITOR',
+          view: 'LOADING', //LOADING, WIZARD, OVERVIEW, TEMPLATES
           feedback: { code: null, message: null },
+          userInfo:
+          {
+              name: '',
+              phone: '',
+              picture: '',
+              job:
+              {
+                  title: '',
+                  company: ''
+              },
+              website:
+              {
+                  url: '',
+                  name: ''
+              }
+          },
+          wizardMessage: '',
+          messages: [],
           templates: [],
           signatures: [],
-          selectedSignature: null
+          selectedSignature: null,
+          newSignature:
+          {
+              name: '',
+              template: null,
+              messages: []
+          }
       };
 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,6 +45,30 @@ angular.module('sigjar')
       // Functions
       //
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      $scope.openTemplates = function() {
+
+          var index = $scope.options.signatures.length + 1;
+
+          while ($scope.isNameTaken( 'Signature ' + index )) {
+
+              index++;
+          }
+
+          $scope.options.newSignature.name = 'Signature ' + index;
+
+          $scope.options.view = 'TEMPLATES';
+      };
+
+      $scope.openOverview = function() {
+
+          $scope.options.view = 'OVERVIEW';
+      };
+
+      $scope.openUserInfoWizard = function() {
+
+          $scope.options.view = 'WIZARD';
+      };
 
       $scope.selectSignature = function( signature ) {
 
@@ -45,27 +93,6 @@ angular.module('sigjar')
       $scope.isNameTaken = function( name ) {
 
           return $scope.getNameHits( name ) > 0;
-      };
-
-      $scope.createSignature = function() {
-
-          var index = $scope.options.signatures.length + 1;
-
-          while ($scope.isNameTaken( 'Signature ' + index )) {
-
-              index++;
-          }
-
-          $scope.options.signatures.push(
-              {
-                  name: 'Signature ' + index,
-                  code: '<p>Kind regards,<br/>John Doe</p>'
-              }
-          );
-
-          $scope.options.selectedSignature = $scope.options.signatures[$scope.options.signatures.length-1];
-
-          $scope.saveOptions( 'The signature has been created.' );
       };
 
       $scope.removeSignature = function() {
@@ -109,27 +136,6 @@ angular.module('sigjar')
           });
       };
 
-      $scope.openTemplates = function() {
-
-          $scope.options.view = 'TEMPLATES';
-      };
-
-      $scope.openEditor = function() {
-
-          $scope.options.view = 'EDITOR';
-      };
-
-      $scope.useTemplate = function( template ) {
-
-          if (!template) {
-
-              return;
-          }
-
-          $scope.options.selectedSignature.code = template.code;
-          $scope.openEditor();
-      };
-
       $scope.getTrustedHTML = function( code ) {
 
           return $sce.trustAsHtml( code );
@@ -145,27 +151,152 @@ angular.module('sigjar')
           $scope.options.feedback = { code: null, message: null };
       };
 
-      $scope.loadOptions = function() {
+      $scope.setWizardMessage = function( message ) {
 
-          chrome.storage.sync.get(
-              { templates: [] },
-              function( items ) {
+          $scope.options.wizardMessage = message;
+      };
 
-                  $scope.$apply(function () {
+      $scope.newSignatureFromTemplate = function( name, template ) {
 
-                      $scope.options.templates = items.templates;
-                  });
+          //TODO: parse template
+          var code = template.code;
+
+          //Add messages if needed
+          for (var i = 0; i < $scope.options.messages.length; i++) {
+
+              var message = $scope.options.messages[i];
+
+              if (message.selected) {
+
+                  code = code + message.code;
+              }
+          }
+
+          $scope.options.signatures.push(
+              {
+                  name: name,
+                  code: code
               }
           );
+      };
+
+      $scope.createSignature = function() {
+
+          $scope.newSignatureFromTemplate( $scope.options.newSignature.name, $scope.options.newSignature.template );
+          $scope.selectSignature( $scope.options.signatures[$scope.options.signatures.length-1] );
+          $scope.saveOptions( 'The signature has been created.' );
+          $scope.options.view = 'OVERVIEW';
+      };
+
+      $scope.saveUserInfo = function() {
+
+          //If no signatures available, create one
+          if ($scope.options.signatures.length == 0) {
+
+              $scope.newSignatureFromTemplate( 'Personal', $scope.options.templates[0] );
+              $scope.selectSignature( $scope.options.signatures[0] );
+          }
+
+          $scope.saveOptions();
+          $scope.options.view = 'OVERVIEW';
+      };
+
+      $scope.loadTemplateCode = function( template ) {
+
+          $http.get( template.file ).then(function(response) {
+
+              template.code = response.data;
+          });
+      };
+
+      $scope.nextTemplate = function() {
+
+          $scope.selectTemplate( $scope.options.newSignature.template.id + 1 );
+      };
+
+      $scope.previousTemplate = function() {
+
+          $scope.selectTemplate( $scope.options.newSignature.template.id - 1 );
+      };
+
+      $scope.selectTemplate = function( index ) {
+
+          if (index >= $scope.options.templates.length) {
+
+              index = 0;
+          }
+          else if (index < 0) {
+
+              index = $scope.options.templates.length - 1;
+          }
+
+          $scope.options.newSignature.template = $scope.options.templates[index];
+      };
+
+      $scope.loadOptions = function() {
+
+          //
+          // Load templates...
+          //
+
+          $http.get( 'templates/templates.json' ).success(function (data) {
+
+              //Messages
+              $scope.options.messages = data.messages;
+
+              //Load messages code
+              for (var i = 0; i < $scope.options.messages.length; i++) {
+
+                  $scope.loadTemplateCode( $scope.options.messages[i] );
+              }
+
+              //Templates
+              $scope.options.templates = data.templates;
+
+              //Load templates code
+              for (i = 0; i < $scope.options.templates.length; i++) {
+
+                  $scope.loadTemplateCode( $scope.options.templates[i] );
+              }
+
+              $scope.options.newSignature.template = $scope.options.templates[0];
+          });
+
+          //
+          // Load saved settings
+          //
 
           chrome.storage.sync.get(
-              { signatures: [] },
+              { data: {} },
               function( items ) {
 
                   $scope.$apply(function () {
 
-                      $scope.options.signatures = items.signatures;
-                      $scope.selectSignature( $scope.options.signatures[0] );
+                      //
+                      // Load signatures...
+                      //
+
+                      $scope.options.signatures = items.data.signatures;
+                      if ($scope.options.signatures.length > 0) {
+
+                          $scope.selectSignature( $scope.options.signatures[0] );
+                      }
+
+                      //
+                      // Load user info...
+                      //
+
+                      var userInfo = items.data.userInfo;
+
+                      if (userInfo && userInfo.name) {
+
+                          $scope.options.userInfo = userInfo;
+                          $scope.options.view = 'OVERVIEW';
+                      }
+                      else {
+
+                          $scope.options.view = 'WIZARD';
+                      }
                   });
               }
           );
@@ -175,8 +306,26 @@ angular.module('sigjar')
 
           message = message || 'Options saved.';
 
+          for (var i = 0 ; i < $scope.options.signatures.length; i++) {
+
+              if (!$scope.options.signatures[i].name) {
+
+                  $scope.selectSignature( $scope.options.signatures[i] );
+                  $scope.options.feedback = { code: 'NOK', message: 'Name cannot be empty!' };
+                  $timeout( function() { $scope.resetFeedback(); }, 3000 );
+
+                  return;
+              }
+          }
+
+          var data =
+          {
+              userInfo: $scope.options.userInfo,
+              signatures: $scope.options.signatures
+          };
+
           chrome.storage.sync.set(
-              { signatures: $scope.options.signatures },
+              { data: data },
               function() {
 
                   $scope.$apply(function () {
@@ -202,6 +351,18 @@ angular.module('sigjar')
               if ($scope.getNameHits( $scope.options.selectedSignature.name ) > 1) {
 
                   $scope.options.selectedSignature.name = $scope.options.selectedSignature.name + ' (1)';
+              }
+          }
+
+      } );
+
+      $scope.$watch( 'options.newSignature.name', function( value ) {
+
+          if ($scope.options.newSignature && $scope.options.newSignature.name) {
+
+              if ($scope.getNameHits( $scope.options.newSignature.name ) > 0) {
+
+                  $scope.options.newSignature.name = $scope.options.newSignature.name + ' (1)';
               }
           }
 
