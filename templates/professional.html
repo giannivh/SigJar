@@ -2,18 +2,25 @@
     <tbody>
     <tr>
         <td colspan="3" style="font: 13px Helvetica,serif; color: #333333; border-bottom: 1px solid #0072b1;">
-            <b style="color: #0072b1; font-size:13px;">John Doe</b> <span style="font-size: 13px;">Software Engineer, MyCompany Inc.</span>
+            <b style="color: #0072b1; font-size:13px;">${name}</b>
+            <span id="job.title" style="font-size: 13px;">${job.title}<span id="job.company" style="font-size: 13px;">, ${job.company}</span></span>
         </td>
     </tr>
     <tr>
         <td valign="top" style="text-align: initial; font-family: Tahoma,serif; white-space: nowrap; color: #777777; padding-top: 5px;">
-            <img src="https://giannivanhoecke.com/sig/mobile.png">&nbsp;<a href="tel:+32012345678" style="color: #777777; text-decoration: none;font-size:11px;">+32 012 34 56 78</a>
+            <span id="phone">
+                <img src="https://giannivanhoecke.com/sig/mobile.png">
+                <a href="tel:${tel}" style="color: #777777; text-decoration: none;font-size:11px;">${phone}</a>
+            </span>
         </td>
         <td valign="top" style="text-align: initial; font-family: Tahoma,serif; white-space: nowrap; color: #777777; padding-top: 5px;">
-            <img src="https://giannivanhoecke.com/sig/website.png">&nbsp;<a href="https://github.com/giannivh/SigJar" target="_blank" style="color: #777777; text-decoration: none;font-size:11px;">https://github.com/giannivh/SigJar</a>
+            <span id="website">
+                <img src="https://giannivanhoecke.com/sig/website.png">
+                <a href="${website.url}" target="_blank" style="color: #777777; text-decoration: none;font-size:11px;">${website.name}</a>
+            </span>
         </td>
         <td valign="top" style="text-align: end; padding-top: 5px;">
-            <img src="https://giannivanhoecke.com/sig/nopicture.png" width="65" height="71" style="border-radius:4px;moz-border-radius:4px;khtml-border-radius:4px;o-border-radius:4px;webkit-border-radius:4px;ms-border-radius: 4px;">
+            <img id="picture" src="${picture}" width="65" height="71" style="border-radius:4px;moz-border-radius:4px;khtml-border-radius:4px;o-border-radius:4px;webkit-border-radius:4px;ms-border-radius: 4px;">
         </td>
     </tr>
     <tr>
