@@ -33,10 +33,24 @@
             </div>
         </form>
 
+        <!-- Editor -->
+        <div class="panel panel-default margin-top-15" data-ng-show="options.advanced">
+            <div class="panel-heading">
+                <h3 class="panel-title">Signature code</h3>
+            </div>
+            <div class="panel-body">
+                <p><small><em>To get the best results, avoid having new lines in your code.</em></small></p>
+                <textarea data-ng-model="options.selectedSignature.code" placeholder="Signature HTML code here..." class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+
         <!-- Preview -->
         <div class="panel panel-default margin-top-15">
             <div class="panel-heading">
-                <h3 class="panel-title">Signature preview</h3>
+                <h3 class="panel-title">
+                    <span>Signature preview</span>
+                    <span class="pull-right"><small><label><input type="checkbox" data-ng-model="options.advanced"/> Show editor</label></small></span>
+                </h3>
             </div>
             <div class="panel-body">
                 <div data-ng-bind-html="getSignaturePreview();" data-ng-if="options.selectedSignature.code"></div>
@@ -65,16 +79,6 @@
                 </p>
             </div>
         </div>
-
-        <!-- Editor -->
-        <!--
-        <p>
-            <strong>Signature:</strong>
-            <small><em>To get the best results, avoid having new lines in your code.</em></small>
-            <span class="pull-right"><a class="pointer" data-ng-click="openTemplates();"><em>Templates...</em></a></span>
-        </p>
-        <textarea data-ng-model="options.selectedSignature.code" placeholder="Signature HTML code here..." class="form-control" rows="5"></textarea>
-        -->
 
     </div>
 

@@ -12,12 +12,23 @@
   [
     {
       "id": 0,
-      "name": "Basic",
-      "file": "templates/basic.html"
+      "name": "Minimalistic",
+      "author": "SigJar",
+      "description": "The most simple signature with no additional eye candy.",
+      "file": "templates/minimalistic.html"
     },
     {
       "id": 1,
+      "name": "Basic",
+      "author": "SigJar",
+      "description": "A basic, yet beautiful signature.",
+      "file": "templates/basic.html"
+    },
+    {
+      "id": 2,
       "name": "Professional",
+      "author": "SigJar",
+      "description": "A more professional looking signature.",
       "file": "templates/professional.html"
     }
   ]

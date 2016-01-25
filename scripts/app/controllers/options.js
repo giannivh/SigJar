@@ -10,6 +10,7 @@ angular.module('sigjar')
       $scope.options =
       {
           view: 'LOADING', //LOADING, WIZARD, OVERVIEW, TEMPLATES
+          advanced: false,
           feedback: { code: null, message: null },
           userInfo:
           {
@@ -34,6 +35,7 @@ angular.module('sigjar')
           selectedSignature: null,
           newSignature:
           {
+              useTemplate: true,
               name: '',
               template: null,
               messages: []
@@ -158,18 +160,27 @@ angular.module('sigjar')
 
       $scope.newSignatureFromTemplate = function( name, template ) {
 
-          //TODO: parse template
-          var code = template.code;
+          var code = '';
 
-          //Add messages if needed
-          for (var i = 0; i < $scope.options.messages.length; i++) {
+          if (template) {
 
-              var message = $scope.options.messages[i];
+              //TODO: parse template
+              code = template.code;
 
-              if (message.selected) {
+              //Add messages if needed
+              for (var i = 0; i < $scope.options.messages.length; i++) {
 
-                  code = code + message.code;
+                  var message = $scope.options.messages[i];
+
+                  if (message.selected) {
+
+                      code = code + message.code;
+                  }
               }
+          }
+          else {
+
+              code = '<p>Kind regards,<br />' + $scope.options.userInfo.name + '</p>';
           }
 
           $scope.options.signatures.push(
@@ -182,9 +193,17 @@ angular.module('sigjar')
 
       $scope.createSignature = function() {
 
-          $scope.newSignatureFromTemplate( $scope.options.newSignature.name, $scope.options.newSignature.template );
+          var useTemplate = $scope.options.newSignature.useTemplate;
+
+          $scope.newSignatureFromTemplate($scope.options.newSignature.name, useTemplate? $scope.options.newSignature.template: null );
           $scope.selectSignature( $scope.options.signatures[$scope.options.signatures.length-1] );
           $scope.saveOptions( 'The signature has been created.' );
+
+          if (!useTemplate) {
+
+              $scope.options.advanced = true;
+          }
+
           $scope.options.view = 'OVERVIEW';
       };
 
@@ -194,7 +213,7 @@ angular.module('sigjar')
           if ($scope.options.signatures.length == 0) {
 
               $scope.newSignatureFromTemplate( 'Personal', $scope.options.templates[0] );
-              $scope.selectSignature( $scope.options.signatures[0] );
+              $scope.selectSignature( $scope.options.signatures[1] );
           }
 
           $scope.saveOptions();

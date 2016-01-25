@@ -1,9 +1,11 @@
 html {
 
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     min-width: 800px;
     width: 800px;
     max-width: 800px;
+    height: 500px;
     min-height: 500px;
 }
 
@@ -64,16 +66,10 @@ body {
     height: auto;
 }
 
-.signature-preview-container {
+.signature-container {
 
     width: 100%;
     min-height: 120px;
     height: 120px;
     max-height: 120px;
-}
-
-.signature-preview {
-
-    width: 50%;
-    margin: 0 auto;
 }
