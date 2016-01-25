@@ -269,8 +269,8 @@ angular.module('sigjar')
           //If no signatures available, create one
           if ($scope.options.signatures.length == 0) {
 
-              $scope.newSignatureFromTemplate( 'Personal', $scope.options.templates[0] );
-              $scope.selectSignature( $scope.options.signatures[1] );
+              $scope.newSignatureFromTemplate( 'Personal', $scope.options.templates[1] );
+              $scope.selectSignature( $scope.options.signatures[0] );
           }
 
           $scope.saveOptions();
