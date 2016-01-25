@@ -79,11 +79,12 @@
                 Warning: changes made here will <span class="underline">not</span> reflect on existing signatures!
             </strong>
         </p>
-        <p>* are required fields</p>
-        <p class="border-top text-left" data-ng-bind="options.wizardMessage"></p>
+        <p><small>Please fill out your name, phone, picture, job title and company to get the best results</small></p>
+        <p><small>* are required fields</small></p>
         <p class="border-top text-center" data-ng-if="options.userInfo.picture">
             <img class="picture-preview" data-ng-src="{{ options.userInfo.picture }}" alt="Picture Preview" />
         </p>
+        <p class="border-top text-left"><small data-ng-bind="options.wizardMessage"></small></p>
     </div>
 
 </div>
