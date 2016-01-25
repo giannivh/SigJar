@@ -10,7 +10,9 @@ That's why SigJar was created. It's a simple Google Chrome extension which can i
 
 ## How to install?
 
-SigJar is not yet available in the Google Chrome Web Store, so you'll have to download the project and install it manually:
+SigJar is not yet available in the Google Chrome Web Store, because it's still work in progress. Eventually it will be available from the Google Chrome Web Store.
+
+For now, you'll have to download the project and install it manually:
 
 * Visit `chrome://extensions` in your browser (or open up the Chrome menu by clicking the icon to the far right of the Omnibox:  The menu's icon is three horizontal bars. and select Extensions under the Tools menu to get to the same place).
 * Ensure that the Developer mode checkbox in the top right-hand corner is checked.
