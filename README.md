@@ -8,6 +8,16 @@ If you use a webmail app as your default emailing app, you'll notice the lack of
 
 That's why SigJar was created. It's a simple Google Chrome extension which can insert HTML code into a content editor, like a mail composer window. You can create one or more signatures through the SigJar options.
 
+## Features
+
+* Create fancy HTML signatures withouth knowledge of HTML or CSS.
+* One-time configuration of your personal information. You can edit this later on.
+* Create multiple signatures.
+* New Signature wizard with templates and preview.
+* Custom messages are available, like a disclaimer.
+* Use your signature in any webmail app, e.g. Gmail or Google Inbox.
+* Advanced: edit the HTML code of the signature.
+
 ## How to install?
 
 SigJar is not yet available in the Google Chrome Web Store, because it's still work in progress. Eventually it will be available in the Google Chrome Web Store.
