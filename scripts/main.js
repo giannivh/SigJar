@@ -79,6 +79,9 @@ initializeOptions = function() {
                     function() {
 
                         console.log( 'Default data created!' );
+
+                        //And open first run wizard!
+                        openOptions();
                     }
                 );
             }
