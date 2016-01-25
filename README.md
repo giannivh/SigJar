@@ -37,11 +37,13 @@ Go to the Google Chrome extensions page `chrome://extensions`, and select "Optio
 
 Follow the on-screen instructions to create your fancy HTML signature. There are a few templates to get you started.
 
-<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/sigjar_01_options.png" width=400 height=auto />
-<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/sigjar_02_templates.png" width=400 height=auto />
-
 ## How to insert the signature?
 
 Right click inside the content editor where you want your signature to appear. Hover over "SigJar" and select one of your signatures from the submenu. 
 
-<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/sigjar_03_menu.png" width=400 height=auto />
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/02_personal_info.png" width=400 height=auto />
+<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/03_new_signature.png" width=400 height=auto />
+<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/01_overview.png" width=400 height=auto />
+<img src="https://raw.githubusercontent.com/giannivh/SigJar/master/images/04_advanced_overview.png" width=400 height=auto />
