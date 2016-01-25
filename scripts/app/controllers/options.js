@@ -380,7 +380,7 @@ angular.module('sigjar')
 
       $scope.saveOptions = function( message ) {
 
-          message = message || 'Options saved.';
+          message = message || 'Settings saved.';
 
           for (var i = 0 ; i < $scope.options.signatures.length; i++) {
 
