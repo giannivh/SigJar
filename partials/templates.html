@@ -28,7 +28,7 @@
             </div>
             <div class="col-xs-9 border-left">
                 <div class="text-left signature-container">
-                    <div data-ng-bind-html="getTrustedHTML( options.newSignature.template.code );"></div>
+                    <div data-ng-bind-html="getTrustedHTML( parseCode( options.newSignature.template.code ) );"></div>
                 </div>
             </div>
         </div>

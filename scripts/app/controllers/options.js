@@ -158,13 +158,68 @@ angular.module('sigjar')
           $scope.options.wizardMessage = message;
       };
 
+      $scope.replaceAll = function(target, search, replaceBy) {
+
+          return target.replace( new RegExp( search, 'g' ), replaceBy );
+      };
+
+      $scope.parseCode = function( code ) {
+
+          if (!code) {
+
+              return code;
+          }
+
+          //Replace all variables
+          code = $scope.replaceAll( code, '\\${name}', $scope.options.userInfo.name );
+          code = $scope.replaceAll( code, '\\${job.title}', $scope.options.userInfo.job.title );
+          code = $scope.replaceAll( code, '\\${job.company}', $scope.options.userInfo.job.company );
+          code = $scope.replaceAll( code, '\\${phone}', $scope.options.userInfo.phone );
+          code = $scope.replaceAll( code, '\\${tel}', $scope.replaceAll( $scope.options.userInfo.phone, ' ', '' ) );
+          code = $scope.replaceAll( code, '\\${website.url}', $scope.options.userInfo.website.url );
+          code = $scope.replaceAll( code, '\\${website.name}', $scope.options.userInfo.website.name? $scope.options.userInfo.website.name: $scope.options.userInfo.website.url );
+          code = $scope.replaceAll( code, '\\${picture}', $scope.options.userInfo.picture );
+
+          //Replace all newlines
+          code = $scope.replaceAll( code, '\r?\n|\r', ' ' );
+
+          //Replace all duplicate spaces with 1 space
+          code = $scope.replaceAll( code, ' +(?= )', '' );
+
+          //Create element
+          var element = $( '<div>' + code + '</div>' );
+
+          //Filter out unused tags
+          if (!$scope.options.userInfo.job.title) {
+
+              element.find( "#job\\.title" ).remove();
+          }
+          if (!$scope.options.userInfo.job.company) {
+
+              element.find( "#job\\.company" ).remove();
+          }
+          if (!$scope.options.userInfo.phone) {
+
+              element.find( "#phone" ).remove();
+          }
+          if (!$scope.options.userInfo.website.url) {
+
+              element.find( "#website" ).remove();
+          }
+          if (!$scope.options.userInfo.picture) {
+
+              element.find( "#picture" ).remove();
+          }
+
+          return element.html();
+      };
+
       $scope.newSignatureFromTemplate = function( name, template ) {
 
           var code = '';
 
           if (template) {
 
-              //TODO: parse template
               code = template.code;
 
               //Add messages if needed
@@ -177,6 +232,8 @@ angular.module('sigjar')
                       code = code + message.code;
                   }
               }
+
+              code = $scope.parseCode( code );
           }
           else {
 
@@ -195,7 +252,7 @@ angular.module('sigjar')
 
           var useTemplate = $scope.options.newSignature.useTemplate;
 
-          $scope.newSignatureFromTemplate($scope.options.newSignature.name, useTemplate? $scope.options.newSignature.template: null );
+          $scope.newSignatureFromTemplate( $scope.options.newSignature.name, useTemplate? $scope.options.newSignature.template: null );
           $scope.selectSignature( $scope.options.signatures[$scope.options.signatures.length-1] );
           $scope.saveOptions( 'The signature has been created.' );
 
