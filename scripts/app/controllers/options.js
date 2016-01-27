@@ -197,7 +197,11 @@ angular.module('sigjar')
               return code;
           }
 
-          //Replace all variables
+          //
+          // Replace all variables
+          //
+
+          //General
           code = $scope.replaceAll( code, '\\${name}', $scope.options.userInfo.name );
           code = $scope.replaceAll( code, '\\${job.title}', $scope.options.userInfo.job.title );
           code = $scope.replaceAll( code, '\\${job.company}', $scope.options.userInfo.job.company );
@@ -207,16 +211,37 @@ angular.module('sigjar')
           code = $scope.replaceAll( code, '\\${website.name}', $scope.options.userInfo.website.name? $scope.options.userInfo.website.name: $scope.options.userInfo.website.url );
           code = $scope.replaceAll( code, '\\${picture}', $scope.options.userInfo.picture );
 
+          //Other info
+          code = $scope.replaceAll( code, '\\${phone}', $scope.options.userInfo.phone );
+          code = $scope.replaceAll( code, '\\${fax}', $scope.options.userInfo.fax );
+          code = $scope.replaceAll( code, '\\${address.line1}', $scope.options.userInfo.address.line1 );
+          code = $scope.replaceAll( code, '\\${address.line2}', $scope.options.userInfo.address.line2 );
+
+          //Social
+          code = $scope.replaceAll( code, '\\${skype}', $scope.options.userInfo.skype );
+          code = $scope.replaceAll( code, '\\${facebook}', $scope.options.userInfo.facebook );
+          code = $scope.replaceAll( code, '\\${twitter}', $scope.options.userInfo.twitter );
+          code = $scope.replaceAll( code, '\\${linkedin}', $scope.options.userInfo.linkedin );
+
+          //Apps
+          code = $scope.replaceAll( code, '\\${apps.appStore}', $scope.options.userInfo.apps.appStore );
+          code = $scope.replaceAll( code, '\\${apps.googlePlay}', $scope.options.userInfo.apps.googlePlay );
+          code = $scope.replaceAll( code, '\\${apps.microsoftStore}', $scope.options.userInfo.apps.microsoftStore );
+
           //Replace all newlines
           code = $scope.replaceAll( code, '\r?\n|\r', ' ' );
 
           //Replace all duplicate spaces with 1 space
           code = $scope.replaceAll( code, ' +(?= )', '' );
 
+          //
+          // Filter out unused tags
+          //
+
           //Create element
           var element = $( '<div>' + code + '</div>' );
 
-          //Filter out unused tags
+          //General
           if (!$scope.options.userInfo.job.title) {
 
               element.find( "#job\\.title" ).remove();
@@ -236,6 +261,56 @@ angular.module('sigjar')
           if (!$scope.options.userInfo.picture) {
 
               element.find( "#picture" ).remove();
+          }
+
+          //Other info
+          if (!$scope.options.userInfo.phone) {
+
+              element.find( "#phone" ).remove();
+          }
+          if (!$scope.options.userInfo.fax) {
+
+              element.find( "#fax" ).remove();
+          }
+          if (!$scope.options.userInfo.address.line1) {
+
+              element.find( "#address\\.line1" ).remove();
+          }
+          if (!$scope.options.userInfo.address.line2) {
+
+              element.find( "#address\\.line2" ).remove();
+          }
+
+          //Social
+          if (!$scope.options.userInfo.skype) {
+
+              element.find( "#skype" ).remove();
+          }
+          if (!$scope.options.userInfo.facebook) {
+
+              element.find( "#facebook" ).remove();
+          }
+          if (!$scope.options.userInfo.twitter) {
+
+              element.find( "#twitter" ).remove();
+          }
+          if (!$scope.options.userInfo.linkedin) {
+
+              element.find( "#linkedin" ).remove();
+          }
+
+          //Apps
+          if (!$scope.options.userInfo.apps.appStore) {
+
+              element.find( "#apps\\.appStore" ).remove();
+          }
+          if (!$scope.options.userInfo.apps.googlePlay) {
+
+              element.find( "#apps\\.googlePlay" ).remove();
+          }
+          if (!$scope.options.userInfo.apps.microsoftStore) {
+
+              element.find( "#apps\\.microsoftStore" ).remove();
           }
 
           return element.html();
