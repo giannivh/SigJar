@@ -316,6 +316,31 @@ angular.module('sigjar')
           return element.html();
       };
 
+      $scope.getCodeFromTemplateWithMessages = function( template ) {
+
+          var code = '';
+
+          if (template) {
+
+              code = template.code;
+
+              //Add messages if needed
+              for (var i = 0; i < $scope.options.messages.length; i++) {
+
+                  var message = $scope.options.messages[i];
+
+                  if (message.selected) {
+
+                      code = code + message.code;
+                  }
+              }
+
+              return $scope.parseCode( code );
+          }
+
+          return null;
+      };
+
       $scope.newSignatureFromTemplate = function( name, template ) {
 
           var code = '';
