@@ -9,61 +9,33 @@
 
         <form class="form-horizontal" data-ng-submit="saveUserInfo();">
 
-            <!-- Name -->
-            <div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your name here.' );">
-                <label for="inputName" class="col-xs-4 control-label text-right">Name: *</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputName" placeholder="John Doe" data-ng-model="options.userInfo.name" data-ng-required="true" required>
-                </div>
-            </div>
+            <!-- Info tabs -->
+            <ul class="nav nav-tabs margin-bottom-15">
+                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'GENERAL'}">
+                    <a class="pointer" data-ng-click="showWizardTab( 'GENERAL' );">General info</a>
+                </li>
+                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'DETAILS'}">
+                    <a class="pointer" data-ng-click="showWizardTab( 'DETAILS' );">Other info</a>
+                </li>
+                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'SOCIAL'}">
+                    <a class="pointer" data-ng-click="showWizardTab( 'SOCIAL' );">Social</a>
+                </li>
+                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'APPS'}">
+                    <a class="pointer" data-ng-click="showWizardTab( 'APPS' );">Apps</a>
+                </li>
+            </ul>
 
-            <!-- Phone -->
-            <div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your phone number here.' );">
-                <label for="inputPhone" class="col-xs-4 control-label text-right">Phone:</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputPhone" placeholder="+32 012 34 56 78" data-ng-model="options.userInfo.phone">
-                </div>
-            </div>
+            <!-- Personal info -->
+            <div data-ng-include data-src="'partials/wizard/general.html'" data-ng-show="options.wizard.view == 'GENERAL'"></div>
 
-            <!-- Picture -->
-            <div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter a link to your picture here. You can use dropbox, Gravatar, or an image host to upload your picture to. Please keep your picture small: 200x200 is advised.' );">
-                <label for="inputPicture" class="col-xs-4 control-label text-right">Picture:</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputPicture" placeholder="https://" data-ng-model="options.userInfo.picture">
-                </div>
-            </div>
+            <!-- Personal info -->
+            <div data-ng-include data-src="'partials/wizard/details.html'" data-ng-show="options.wizard.view == 'DETAILS'"></div>
 
-            <!-- Job title -->
-            <div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your job title here.' );">
-                <label for="inputJobTitle" class="col-xs-4 control-label text-right">Job Title:</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputJobTitle" placeholder="Software Engineer" data-ng-model="options.userInfo.job.title">
-                </div>
-            </div>
+            <!-- Social -->
+            <div data-ng-include data-src="'partials/wizard/social.html'" data-ng-show="options.wizard.view == 'SOCIAL'"></div>
 
-            <!-- Company -->
-            <div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your company\'s name here.' );">
-                <label for="inputJobCompany" class="col-xs-4 control-label text-right">Company Name:</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputJobCompany" placeholder="MyCompany Inc." data-ng-model="options.userInfo.job.company">
-                </div>
-            </div>
-
-            <!-- Website URL -->
-            <div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter the URL to your, or your company\'s website here.' );">
-                <label for="inputWebsiteURL" class="col-xs-4 control-label text-right">Website URL:</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputWebsiteURL" placeholder="https://" data-ng-model="options.userInfo.website.url">
-                </div>
-            </div>
-
-            <!-- Website Name -->
-            <div class="form-group" data-ng-show="options.userInfo.website.url" data-ng-mouseover="setWizardMessage( 'Please enter the name of your, or your company\'s website here.' );">
-                <label for="inputWebsiteName" class="col-xs-4 control-label text-right">Website Name:</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" id="inputWebsiteName" placeholder="visit us" data-ng-model="options.userInfo.website.name">
-                </div>
-            </div>
+            <!-- Apps -->
+            <div data-ng-include data-src="'partials/wizard/apps.html'" data-ng-show="options.wizard.view == 'APPS'"></div>
 
             <!-- Buttons -->
             <div class="row">
@@ -96,7 +68,7 @@
         <p class="border-top text-center" data-ng-if="options.userInfo.picture">
             <img class="picture-preview" data-ng-src="{{ options.userInfo.picture }}" alt="Picture Preview" />
         </p>
-        <p class="border-top text-left"><small data-ng-bind="options.wizardMessage"></small></p>
+        <p class="border-top text-left"><small data-ng-bind="options.wizard.message"></small></p>
     </div>
 
 </div>

@@ -15,8 +15,19 @@ angular.module('sigjar')
           userInfo:
           {
               name: '',
-              phone: '',
               picture: '',
+              mobile: '',
+              phone: '',
+              fax: '',
+              skype: '',
+              facebook: '',
+              twitter: '',
+              linkedin: '',
+              address:
+              {
+                  line1: '',
+                  line2: ''
+              },
               job:
               {
                   title: '',
@@ -26,9 +37,19 @@ angular.module('sigjar')
               {
                   url: '',
                   name: ''
+              },
+              apps:
+              {
+                  appStore: '',
+                  googlePlay: '',
+                  microsoftStore: ''
               }
           },
-          wizardMessage: '',
+          wizard:
+          {
+              message: '',
+              view: 'GENERAL'
+          },
           messages: [],
           templates: [],
           signatures: [],
@@ -70,6 +91,12 @@ angular.module('sigjar')
       $scope.openUserInfoWizard = function() {
 
           $scope.options.view = 'WIZARD';
+      };
+
+      $scope.showWizardTab = function( tab ) {
+
+          $scope.options.wizard.view = tab;
+          $scope.options.wizard.message = '';
       };
 
       $scope.selectSignature = function( signature ) {
@@ -155,7 +182,7 @@ angular.module('sigjar')
 
       $scope.setWizardMessage = function( message ) {
 
-          $scope.options.wizardMessage = message;
+          $scope.options.wizard.message = message;
       };
 
       $scope.replaceAll = function(target, search, replaceBy) {
@@ -174,8 +201,8 @@ angular.module('sigjar')
           code = $scope.replaceAll( code, '\\${name}', $scope.options.userInfo.name );
           code = $scope.replaceAll( code, '\\${job.title}', $scope.options.userInfo.job.title );
           code = $scope.replaceAll( code, '\\${job.company}', $scope.options.userInfo.job.company );
-          code = $scope.replaceAll( code, '\\${phone}', $scope.options.userInfo.phone );
-          code = $scope.replaceAll( code, '\\${tel}', $scope.replaceAll( $scope.options.userInfo.phone, ' ', '' ) );
+          code = $scope.replaceAll( code, '\\${mobile}', $scope.options.userInfo.mobile );
+          code = $scope.replaceAll( code, '\\${tel}', $scope.replaceAll( $scope.options.userInfo.mobile, ' ', '' ) );
           code = $scope.replaceAll( code, '\\${website.url}', $scope.options.userInfo.website.url );
           code = $scope.replaceAll( code, '\\${website.name}', $scope.options.userInfo.website.name? $scope.options.userInfo.website.name: $scope.options.userInfo.website.url );
           code = $scope.replaceAll( code, '\\${picture}', $scope.options.userInfo.picture );
@@ -198,9 +225,9 @@ angular.module('sigjar')
 
               element.find( "#job\\.company" ).remove();
           }
-          if (!$scope.options.userInfo.phone) {
+          if (!$scope.options.userInfo.mobile) {
 
-              element.find( "#phone" ).remove();
+              element.find( "#mobile" ).remove();
           }
           if (!$scope.options.userInfo.website.url) {
 

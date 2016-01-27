@@ -1,7 +1,7 @@
 html {
 
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: visible;
     min-width: 800px;
     width: 800px;
     max-width: 800px;
@@ -16,6 +16,11 @@ body {
 .margin-top-15 {
 
     margin-top: 15px;
+}
+
+.margin-bottom-15 {
+
+    margin-bottom: 15px;
 }
 
 .pointer {

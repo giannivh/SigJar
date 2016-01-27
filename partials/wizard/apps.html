@@ -1,0 +1,23 @@
+<!-- App Store -->
+<div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter the link to your app in the App Store here.' );">
+    <label for="inputAppStore" class="col-xs-4 control-label text-right">App Store:</label>
+    <div class="col-xs-8">
+        <input type="text" class="form-control" id="inputAppStore" placeholder="https://itunes.apple.com/..." data-ng-model="options.userInfo.apps.appStore">
+    </div>
+</div>
+
+<!-- Google Play -->
+<div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter the link to your app in the Google Play Store here.' );">
+    <label for="inputGooglePlay" class="col-xs-4 control-label text-right">Google Play:</label>
+    <div class="col-xs-8">
+        <input type="text" class="form-control" id="inputGooglePlay" placeholder="https://play.google.com/store/..." data-ng-model="options.userInfo.apps.googlePlay">
+    </div>
+</div>
+
+<!-- Microsoft Store -->
+<div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter the link to your app in the Microsoft Store here.' );">
+    <label for="inputMicrosoftStore" class="col-xs-4 control-label text-right">Microsoft Store:</label>
+    <div class="col-xs-8">
+        <input type="text" class="form-control" id="inputMicrosoftStore" placeholder="https://www.microsoft.com/en-us/store/apps/" data-ng-model="options.userInfo.apps.microsoftStore">
+    </div>
+</div>

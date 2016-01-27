@@ -1,0 +1,24 @@
+<!-- Phone -->
+<div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your (landline) phone number here.' );">
+    <label for="inputPhone" class="col-xs-4 control-label text-right">Phone:</label>
+    <div class="col-xs-8">
+        <input type="text" class="form-control" id="inputPhone" placeholder="+32 1 234 56 78" data-ng-model="options.userInfo.phone">
+    </div>
+</div>
+
+<!-- Fax -->
+<div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your fax number here.' );">
+    <label for="inputFax" class="col-xs-4 control-label text-right">Fax:</label>
+    <div class="col-xs-8">
+        <input type="text" class="form-control" id="inputFax" placeholder="+32 1 234 56 78" data-ng-model="options.userInfo.fax">
+    </div>
+</div>
+
+<!-- Address -->
+<div class="form-group" data-ng-mouseover="setWizardMessage( 'Please enter your address here.' );">
+    <label for="inputAddressLine1" class="col-xs-4 control-label text-right">Address:</label>
+    <div class="col-xs-8">
+        <input type="text" class="form-control margin-bottom-15" id="inputAddressLine1" placeholder="Address Line 1" data-ng-model="options.userInfo.address.line1">
+        <input type="text" class="form-control" id="inputAddressLine2" placeholder="Address Line 2" data-ng-model="options.userInfo.address.line2">
+    </div>
+</div>
