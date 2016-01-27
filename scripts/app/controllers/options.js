@@ -338,7 +338,7 @@ angular.module('sigjar')
               return $scope.parseCode( code );
           }
 
-          return null;
+          return '';
       };
 
       $scope.newSignatureFromTemplate = function( name, template ) {
@@ -347,20 +347,7 @@ angular.module('sigjar')
 
           if (template) {
 
-              code = template.code;
-
-              //Add messages if needed
-              for (var i = 0; i < $scope.options.messages.length; i++) {
-
-                  var message = $scope.options.messages[i];
-
-                  if (message.selected) {
-
-                      code = code + message.code;
-                  }
-              }
-
-              code = $scope.parseCode( code );
+              code = $scope.getCodeFromTemplateWithMessages( template );
           }
           else {
 
