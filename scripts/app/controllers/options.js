@@ -42,7 +42,8 @@ angular.module('sigjar')
               {
                   appStore: '',
                   googlePlay: '',
-                  microsoftStore: ''
+                  microsoftStore: '',
+                  amazonAppstore: ''
               }
           },
           wizard:
@@ -227,6 +228,7 @@ angular.module('sigjar')
           code = $scope.replaceAll( code, '\\${apps.appStore}', $scope.options.userInfo.apps.appStore );
           code = $scope.replaceAll( code, '\\${apps.googlePlay}', $scope.options.userInfo.apps.googlePlay );
           code = $scope.replaceAll( code, '\\${apps.microsoftStore}', $scope.options.userInfo.apps.microsoftStore );
+          code = $scope.replaceAll( code, '\\${apps.amazonAppstore}', $scope.options.userInfo.apps.amazonAppstore );
 
           //Replace all newlines
           code = $scope.replaceAll( code, '\r?\n|\r', ' ' );
@@ -311,6 +313,10 @@ angular.module('sigjar')
           if (!$scope.options.userInfo.apps.microsoftStore) {
 
               element.find( "#apps\\.microsoftStore" ).remove();
+          }
+          if (!$scope.options.userInfo.apps.amazonAppstore) {
+
+              element.find( "#apps\\.amazonAppstore" ).remove();
           }
 
           return element.html();
