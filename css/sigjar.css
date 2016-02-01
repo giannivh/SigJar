@@ -120,3 +120,8 @@ body {
 
     font-weight: normal;
 }
+
+.x-small-font {
+
+    font-size: x-small;
+}

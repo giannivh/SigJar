@@ -19,30 +19,14 @@
     </p>
     <div data-ng-show="options.newSignature.useTemplate">
         <!-- Messages -->
-        <p class="text-center">
+        <p class="text-center no-margin-bottom">
             <strong>Add additional messages: </strong>
             <label class="normal-font" data-ng-repeat="message in options.messages">
                 <input type="checkbox" data-ng-model="message.selected" />
                 <span data-ng-bind="message.name"></span>&nbsp;
             </label>
         </p>
-        <div class="well no-margin-bottom">
-            <div class="row">
-                <div class="col-xs-3">
-                    <p>
-                        <strong data-ng-bind="options.newSignature.template.name"></strong><br />
-                        <small><em>By <span data-ng-bind="options.newSignature.template.author"></span></em></small>
-                    </p>
-                    <p data-ng-bind="options.newSignature.template.description"></p>
-                </div>
-                <div class="col-xs-9 border-left">
-                    <div class="text-left signature-container">
-                        <div data-ng-bind-html="getTrustedHTML( getCodeFromTemplateWithMessages( options.newSignature.template ) );"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="text-center">
+        <nav class="text-center x-small-font">
             <ul class="pagination">
                 <li>
                     <a href="#" aria-label="Previous" data-ng-click="previousTemplate();">
@@ -61,6 +45,22 @@
                 </li>
             </ul>
         </nav>
+        <div class="well no-margin-bottom">
+            <div class="row">
+                <div class="col-xs-3">
+                    <p>
+                        <strong data-ng-bind="options.newSignature.template.name"></strong><br />
+                        <small><em>By <span data-ng-bind="options.newSignature.template.author"></span></em></small>
+                    </p>
+                    <p data-ng-bind="options.newSignature.template.description"></p>
+                </div>
+                <div class="col-xs-9 border-left">
+                    <div class="text-left signature-container">
+                        <div data-ng-bind-html="getTrustedHTML( getCodeFromTemplateWithMessages( options.newSignature.template ) );"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
