@@ -74,3 +74,34 @@ body {
     width: 100%;
     min-height: 120px;
 }
+
+.pre-footer {
+
+    padding-bottom: 55px;
+}
+
+.footer {
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 55px;
+    background: #f9f9f9;
+    z-index: 9999;
+}
+
+.footer:before {
+
+    content: "";
+    height: 1px;
+    background: linear-gradient( to right, rgba( 0, 0, 0, 0 ) 0%, rgba( 147, 147, 147, 1 ) 50%, rgba( 0, 0, 0, 0 ) 100% );
+    display: block;
+}
+
+.footer-content {
+
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
