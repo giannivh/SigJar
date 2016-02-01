@@ -105,3 +105,13 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.no-margin-bottom {
+
+    margin-bottom: 0;
+}
+
+.pagination {
+
+    margin: 10px 0;
+}
