@@ -1,74 +1,81 @@
-<div data-ng-hide="options.signatures.length > 0">
-    <h2 class="text-center">Hello there, we need some info to get started!</h2>
-    <hr />
+<div class="pre-footer">
+    <div data-ng-hide="options.signatures.length > 0">
+        <h2 class="text-center">Hello there, we need some info to get started!</h2>
+        <hr />
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-8 border-right">
+
+            <form class="form-horizontal" data-ng-submit="saveUserInfo();">
+
+                <!-- Info tabs -->
+                <ul class="nav nav-tabs margin-bottom-15">
+                    <li role="presentation" data-ng-class="{'active': options.wizard.view == 'GENERAL'}">
+                        <a class="pointer" data-ng-click="showWizardTab( 'GENERAL' );">General info</a>
+                    </li>
+                    <li role="presentation" data-ng-class="{'active': options.wizard.view == 'DETAILS'}">
+                        <a class="pointer" data-ng-click="showWizardTab( 'DETAILS' );">Other info</a>
+                    </li>
+                    <li role="presentation" data-ng-class="{'active': options.wizard.view == 'SOCIAL'}">
+                        <a class="pointer" data-ng-click="showWizardTab( 'SOCIAL' );">Social</a>
+                    </li>
+                    <li role="presentation" data-ng-class="{'active': options.wizard.view == 'APPS'}">
+                        <a class="pointer" data-ng-click="showWizardTab( 'APPS' );">Apps</a>
+                    </li>
+                </ul>
+
+                <!-- Personal info -->
+                <div data-ng-include data-src="'partials/wizard/general.html'" data-ng-show="options.wizard.view == 'GENERAL'"></div>
+
+                <!-- Personal info -->
+                <div data-ng-include data-src="'partials/wizard/details.html'" data-ng-show="options.wizard.view == 'DETAILS'"></div>
+
+                <!-- Social -->
+                <div data-ng-include data-src="'partials/wizard/social.html'" data-ng-show="options.wizard.view == 'SOCIAL'"></div>
+
+                <!-- Apps -->
+                <div data-ng-include data-src="'partials/wizard/apps.html'" data-ng-show="options.wizard.view == 'APPS'"></div>
+
+            </form>
+
+        </div>
+
+        <!-- Info panel-->
+        <div class="col-xs-4">
+            <p class="text-left" data-ng-show="options.signatures.length > 0">
+                <strong>
+                    Warning: changes made here will <span class="underline">not</span> reflect on existing signatures!
+                </strong>
+            </p>
+            <p><small>Please fill out your name, phone, picture, job title and company to get the best results</small></p>
+            <p><small>* are required fields</small></p>
+            <p class="border-top text-center" data-ng-if="options.userInfo.picture">
+                <img class="picture-preview" data-ng-src="{{ options.userInfo.picture }}" alt="Picture Preview" />
+            </p>
+            <p class="border-top text-left"><small data-ng-bind="options.wizard.message"></small></p>
+        </div>
+
+    </div>
 </div>
 
-<div class="row">
-
-    <div class="col-xs-8 border-right">
-
-        <form class="form-horizontal" data-ng-submit="saveUserInfo();">
-
-            <!-- Info tabs -->
-            <ul class="nav nav-tabs margin-bottom-15">
-                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'GENERAL'}">
-                    <a class="pointer" data-ng-click="showWizardTab( 'GENERAL' );">General info</a>
-                </li>
-                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'DETAILS'}">
-                    <a class="pointer" data-ng-click="showWizardTab( 'DETAILS' );">Other info</a>
-                </li>
-                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'SOCIAL'}">
-                    <a class="pointer" data-ng-click="showWizardTab( 'SOCIAL' );">Social</a>
-                </li>
-                <li role="presentation" data-ng-class="{'active': options.wizard.view == 'APPS'}">
-                    <a class="pointer" data-ng-click="showWizardTab( 'APPS' );">Apps</a>
-                </li>
-            </ul>
-
-            <!-- Personal info -->
-            <div data-ng-include data-src="'partials/wizard/general.html'" data-ng-show="options.wizard.view == 'GENERAL'"></div>
-
-            <!-- Personal info -->
-            <div data-ng-include data-src="'partials/wizard/details.html'" data-ng-show="options.wizard.view == 'DETAILS'"></div>
-
-            <!-- Social -->
-            <div data-ng-include data-src="'partials/wizard/social.html'" data-ng-show="options.wizard.view == 'SOCIAL'"></div>
-
-            <!-- Apps -->
-            <div data-ng-include data-src="'partials/wizard/apps.html'" data-ng-show="options.wizard.view == 'APPS'"></div>
-
-            <!-- Buttons -->
-            <div class="row">
-                <div class="col-xs-6" data-ng-if="options.signatures.length > 0">
-                    <a class="btn btn-default full-width" data-ng-click="openOverview();">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
-                    </a>
-                </div>
-                <div data-ng-class="{'col-xs-6': options.signatures.length > 0, 'col-xs-12': options.signatures.length == 0}">
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-success full-width">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
-                    </button>
-                </div>
+<!-- Buttons -->
+<div class="footer">
+    <div class="footer-content">
+        <!-- Buttons -->
+        <div class="row">
+            <div class="col-xs-6" data-ng-if="options.signatures.length > 0">
+                <a class="btn btn-default full-width" data-ng-click="openOverview();">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+                </a>
             </div>
-
-        </form>
-
+            <div data-ng-class="{'col-xs-6': options.signatures.length > 0, 'col-xs-12': options.signatures.length == 0}">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-success full-width">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                </button>
+            </div>
+        </div>
     </div>
-
-    <!-- Info panel-->
-    <div class="col-xs-4">
-        <p class="text-left" data-ng-show="options.signatures.length > 0">
-            <strong>
-                Warning: changes made here will <span class="underline">not</span> reflect on existing signatures!
-            </strong>
-        </p>
-        <p><small>Please fill out your name, phone, picture, job title and company to get the best results</small></p>
-        <p><small>* are required fields</small></p>
-        <p class="border-top text-center" data-ng-if="options.userInfo.picture">
-            <img class="picture-preview" data-ng-src="{{ options.userInfo.picture }}" alt="Picture Preview" />
-        </p>
-        <p class="border-top text-left"><small data-ng-bind="options.wizard.message"></small></p>
-    </div>
-
 </div>
