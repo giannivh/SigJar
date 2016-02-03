@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pre-footer">
 
     <!-- Signature selection -->
     <div class="col-xs-3">
@@ -58,28 +58,35 @@
             </div>
         </div>
 
+    </div>
+
+</div>
+
+<!-- Buttons -->
+<div class="footer">
+    <div class="footer-content">
+
         <!-- Feedback and buttons -->
-        <div class="margin-top-15 row">
+        <div class="row">
             <div class="col-xs-6 text-left">
                 <!-- Feedback message -->
                 <p>
                     <strong data-ng-class="{'text-success': options.feedback.code == 'OK', 'text-danger': options.feedback.code != 'OK'}" data-ng-show="options.feedback.code" data-ng-bind="options.feedback.message"></strong>
                 </p>
             </div>
-            <div class="col-xs-6 text-right">
-                <p>
-                    <!-- Remove button -->
-                    <a class="btn btn-danger" data-ng-click="removeSignature();" data-ng-disabled="options.signatures.length == 1">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
-                    </a>
-                    <!-- Save button -->
-                    <a class="btn btn-success" data-ng-click="saveOptions();">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
-                    </a>
-                </p>
+            <div class="col-xs-offset-2 col-xs-2 text-center">
+                <!-- Remove button -->
+                <a class="btn btn-danger full-width" data-ng-click="removeSignature();" data-ng-disabled="options.signatures.length == 1">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+                </a>
+            </div>
+            <div class="col-xs-2 text-center">
+                <!-- Save button -->
+                <a class="btn btn-success full-width" data-ng-click="saveOptions();">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                </a>
             </div>
         </div>
 
     </div>
-
 </div>
